@@ -16,7 +16,7 @@ $ npm i egg-rate-limiter --save
 // {app_root}/config/plugin.js
 exports.rateLimiter = {
   enable: true,
-  package: 'egg-rate-limiter',
+  package: '@musicode/egg-rate-limiter',
 };
 ```
 
