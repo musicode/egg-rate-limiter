@@ -28,9 +28,12 @@ exports.middleware = [
   'rateLimiter',
 ]
 exports.rateLimiter = {
-  error: '超过调用上限时的错误信息，有默认值，可不配',
+  onError: function (ctx, app) {
+    // 超过上限时触发
+    // 也可不配此回调，默认会返回 429 状态码
+  },
   routers: {
-    'a/b/c': {
+    '/a/b': {
       // 举个例子，1 分钟最多调 10 次
       max: 10,
       duration: 60 * 1000

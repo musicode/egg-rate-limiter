@@ -92,7 +92,7 @@ module.exports = (options, app) => {
     ctx.set('Retry-After', after)
 
     if (onError) {
-      onError(ctx)
+      onError(ctx, app)
     }
     else {
       // 429 表示过多的请求
