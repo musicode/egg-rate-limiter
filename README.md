@@ -44,6 +44,7 @@ exports.rateLimiter = {
 
 `app/extend/context` 对象需自行扩展一个 `getter`，如下：
 
+```js
 module.exports = {
 
   get rateLimiterId() {
@@ -51,6 +52,7 @@ module.exports = {
   }
 
 }
+```
 
 ## License
 
