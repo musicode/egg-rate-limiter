@@ -1,5 +1,5 @@
 {
-  "name": "egg-rate-limiter",
+  "name": "@musicode/egg-rate-limiter",
   "version": "0.0.1",
   "description": "",
   "eggPlugin": {
