@@ -24,14 +24,13 @@ async function thenify(fn) {
  *     duration: of limit in milliseconds [3600000]
  *   }
  * }
- * options.error - 超过调用上限时的错误信息
- * options.tidy - limit the records count, no greater than max [false]
+ * options.onError - 超过调用上限时的回调
  */
 module.exports = (options, app) => {
 
   const {
     routers,
-    error,
+    onError,
   } = options
 
   return async (ctx, next) => {
@@ -92,9 +91,14 @@ module.exports = (options, app) => {
     const after = (limit.reset - now / 1000) | 0
     ctx.set('Retry-After', after)
 
-    // 429 表示过多的请求
-    ctx.status = 429
-    ctx.body = error || `Rate limit exceeded, retry in ${ms(delta, { long: true })}.`
+    if (onError) {
+      onError(ctx)
+    }
+    else {
+      // 429 表示过多的请求
+      ctx.status = 429
+      ctx.body = `Rate limit exceeded, retry in ${ms(delta, { long: true })}.`
+    }
 
   }
 
